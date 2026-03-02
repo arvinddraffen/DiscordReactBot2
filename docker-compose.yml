@@ -5,4 +5,4 @@ services:
       context: .
       dockerfile: DiscordReactBot/Dockerfile
     volumes:
-      - ./config.json:/app/config.json
+      - ./config/config.json:/app/config.json
