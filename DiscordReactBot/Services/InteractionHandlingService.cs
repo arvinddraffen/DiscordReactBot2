@@ -17,7 +17,8 @@ namespace DiscordReactBot.Services
         private readonly InteractionService _interactions;
         private readonly IServiceProvider _services;
         private readonly ILogger<InteractionService> _logger;
-        private readonly CantareReactModule _messageReactModule;
+        private readonly CantareReactModule _cantareReactModule;
+        private readonly CostcodleReactModule _costcodleReactModule;
 
         public InteractionHandlingService(
             DiscordSocketClient discord,
@@ -30,7 +31,8 @@ namespace DiscordReactBot.Services
             _interactions = interactions;
             _services = services;
             _logger = logger;
-            _messageReactModule = new CantareReactModule();
+            _cantareReactModule = new CantareReactModule();
+            _costcodleReactModule = new CostcodleReactModule();
 
             _interactions.Log += msg => LogUtility.Log(_logger, msg, discord, config.GetSection("adminUserIDs").Get<List<ulong>>());
         }
@@ -74,7 +76,8 @@ namespace DiscordReactBot.Services
         {
             if (!message.Author.IsBot)   // ignore other bot messages (including this bot) for now
             {
-                await _messageReactModule.ReactToMessage(message);
+                await _cantareReactModule.ReactToMessage(message);
+                await _costcodleReactModule.ReactToMessage(message);
             }
         }
     }
