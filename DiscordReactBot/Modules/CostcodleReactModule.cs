@@ -11,6 +11,10 @@ namespace DiscordReactBot.Modules
             if (message.Content.Contains("Costcodle", StringComparison.InvariantCulture))
             {
                 var messageLines = message.Content.Split('\n').Skip(1).ToList();
+                if (messageLines.Last().Contains("costcodle.com"))
+                {
+                    messageLines.RemoveAt(messageLines.Count() - 1);
+                }
                 int charOffset = 0;
                 int rowOffset = 0;
                 int upArrowCount = 0;
